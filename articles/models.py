@@ -16,14 +16,14 @@ class Article(models.Model):
         return self.title
 
 class Scope(models.Model):
-    tag = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
     articles = models.ManyToManyField(Article, through='Tabel', related_name='tags')
     def __str__(self):
-        return self.tag
-
+        return self.name
+2
 
 class Tabel(models.Model):
-    scope = models.ForeignKey(Scope, on_delete=models.CASCADE,verbose_name='Раздел')
+    tag = models.ForeignKey(Scope, on_delete=models.CASCADE,verbose_name='Раздел')
     is_main = models.BooleanField(default=False,verbose_name='Основной')
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='scopes')
 
